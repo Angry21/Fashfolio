@@ -1,0 +1,22 @@
+
+> fashfolio@0.1.0 lint
+> eslint
+
+
+D:\EXAMS\AGENTIC AI\MAJORS\fashfolio\app\api\outfit\route.ts
+   9:14  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+  18:14  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\EXAMS\AGENTIC AI\MAJORS\fashfolio\components\forms\OutfitForm.tsx
+  34:62  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  55:44  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\EXAMS\AGENTIC AI\MAJORS\fashfolio\components\shared\ImageUpload.tsx
+  16:5   warning  'disabled' is defined but never used      @typescript-eslint/no-unused-vars
+  18:47  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\EXAMS\AGENTIC AI\MAJORS\fashfolio\components\shared\Sidebar.tsx
+  2:8  warning  'Image' is defined but never used  @typescript-eslint/no-unused-vars
+
+Γ£û 7 problems (3 errors, 4 warnings)
+

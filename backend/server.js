@@ -77,5 +77,44 @@ app.get('/api/analyze-trends', async (req, res) => {
     }
 });
 
+// 4. AI USER SCORING (For Social Network)
+app.post('/api/score-users', async (req, res) => {
+    try {
+        const users = req.body;
+        // Use 'python3' for Linux compatibility
+        const pythonCommand = process.env.PYTHON_COMMAND || 'python';
+        const pythonProcess = spawn(pythonCommand, ['./ai_scoring.py']);
+
+        let dataString = '';
+        let errorString = '';
+
+        pythonProcess.stdin.write(JSON.stringify(users));
+        pythonProcess.stdin.end();
+
+        pythonProcess.stdout.on('data', (data) => {
+            dataString += data.toString();
+        });
+
+        pythonProcess.stderr.on('data', (data) => {
+            errorString += data.toString();
+            console.error("Python Error:", data.toString());
+        });
+
+        pythonProcess.on('close', (code) => {
+            if (code !== 0) {
+                return res.status(500).json({ error: "AI Scoring Failed", details: errorString });
+            }
+            try {
+                const results = JSON.parse(dataString);
+                res.json(results);
+            } catch (e) {
+                res.status(500).json({ error: "AI Parsing Failed", details: e.message });
+            }
+        });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`FashFolio Server running on port ${PORT}`));

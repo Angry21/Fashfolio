@@ -1,0 +1,23 @@
+app/(dashboard)/collections/create/page.tsx(46,9): error TS2304: Cannot find name 'setSelectedIds'.
+app/(dashboard)/collections/create/page.tsx(46,25): error TS7006: Parameter 'prev' implicitly has an 'any' type.
+app/(dashboard)/collections/create/page.tsx(47,46): error TS7006: Parameter 'item' implicitly has an 'any' type.
+app/(dashboard)/collections/create/page.tsx(52,14): error TS1345: An expression of type 'void' cannot be tested for truthiness.
+app/(dashboard)/collections/create/page.tsx(52,22): error TS2304: Cannot find name 'selectedIds'.
+app/(dashboard)/collections/create/page.tsx(54,9): error TS2304: Cannot find name 'setLoading'.
+app/(dashboard)/collections/create/page.tsx(56,44): error TS18004: No value exists in scope for the shorthand property 'description'. Either declare one or provide an initializer.
+app/(dashboard)/collections/create/page.tsx(56,68): error TS2304: Cannot find name 'selectedIds'.
+app/(dashboard)/collections/create/page.tsx(62,13): error TS2304: Cannot find name 'setLoading'.
+app/(dashboard)/collections/create/page.tsx(75,32): error TS1345: An expression of type 'void' cannot be tested for truthiness.
+app/(dashboard)/collections/create/page.tsx(75,40): error TS2304: Cannot find name 'selectedIds'.
+app/(dashboard)/collections/create/page.tsx(75,68): error TS2304: Cannot find name 'loading'.
+app/(dashboard)/collections/create/page.tsx(78,22): error TS2304: Cannot find name 'loading'.
+app/(dashboard)/collections/create/page.tsx(78,66): error TS2304: Cannot find name 'selectedIds'.
+app/(dashboard)/collections/create/page.tsx(88,21): error TS2322: Type 'void' is not assignable to type 'string | number | readonly string[] | undefined'.
+app/(dashboard)/collections/create/page.tsx(89,38): error TS2304: Cannot find name 'setName'.
+app/(dashboard)/collections/create/page.tsx(94,28): error TS2304: Cannot find name 'description'.
+app/(dashboard)/collections/create/page.tsx(95,38): error TS2304: Cannot find name 'setDescription'.
+app/(dashboard)/collections/create/page.tsx(106,137): error TS2304: Cannot find name 'selectedIds'.
+app/(dashboard)/collections/create/page.tsx(120,79): error TS2304: Cannot find name 'selectedIds'.
+app/(dashboard)/collections/create/page.tsx(122,26): error TS2304: Cannot find name 'selectedIds'.
+app/(dashboard)/dashboard/page.tsx(20,5): error TS1232: An import declaration can only be used at the top level of a namespace or module.
+app/(dashboard)/dashboard/page.tsx(20,31): error TS2307: Cannot find module '@clerk/nextjs' or its corresponding type declarations.

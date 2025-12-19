@@ -1,0 +1,31 @@
+
+> fashfolio@0.1.0 build
+> next build
+
+ ΓÜá Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of D:\EXAMS\AGENTIC AI\MAJORS\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * D:\EXAMS\AGENTIC AI\MAJORS\fashfolio\package-lock.json
+
+   Γû▓ Next.js 16.0.10 (Turbopack)
+   - Environments: .env.local
+
+ ΓÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully in 9.9s
+   Running TypeScript ...
+Failed to compile.
+
+./lib/actions/user.actions.ts:161:34
+Type error: Cannot find name 'auth'.
+
+  159 |     try {
+  160 |         await connectToDatabase();
+> 161 |         const { userId } = await auth(); // Ensure authenticated
+      |                                  ^
+  162 |         if (!userId) throw new Error("Unauthorized");
+  163 |
+  164 |         // 1. Fetch users (limit to 10 for demo speed)
+Next.js build worker exited with code: 1 and signal: null
