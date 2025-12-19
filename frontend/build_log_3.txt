@@ -1,0 +1,165 @@
+
+> fashfolio@0.1.0 build
+> next build
+
+ ΓÜá Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\package-lock.json
+
+   Γû▓ Next.js 16.0.10 (Turbopack)
+   - Environments: .env.local
+
+ ΓÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully in 10.4s
+   Running TypeScript ...
+   Collecting page data using 11 workers ...
+Error: Failed to load external module mongoose: Error: Cannot find module 'sift'
+Require stack:
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\lib\helpers\populate\assignVals.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\lib\model.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\lib\mongoose.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\lib\index.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\index.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\[root-of-the-server]__781d1e47._.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\[turbopack]_runtime.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\app\api\outfit\route.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\server\require.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\server\load-components.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\build\utils.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\build\worker.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\compiled\jest-worker\processChild.js
+    at Context.externalRequire [as x] (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\[turbopack]_runtime.js:514:15)
+    at module evaluation (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\[root-of-the-server]__781d1e47._.js:1:10289)
+    at instantiateModule (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\[turbopack]_runtime.js:715:9)
+    at getOrInstantiateModuleFromParent (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\[turbopack]_runtime.js:738:12)
+    at Context.esmImport [as i] (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\[turbopack]_runtime.js:228:20)
+    at module evaluation (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\_dce5877a._.js:8:48040)
+    at instantiateModule (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\[turbopack]_runtime.js:715:9)
+    at getOrInstantiateModuleFromParent (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\[turbopack]_runtime.js:738:12)
+    at Context.esmImport [as i] (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\[turbopack]_runtime.js:228:20)
+    at module evaluation (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\_9cb1cdda._.js:11:86018)
+Error: Failed to load external module mongoose: Error: Cannot find module 'sift'
+Require stack:
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\lib\helpers\populate\assignVals.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\lib\model.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\lib\mongoose.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\lib\index.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\index.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\[root-of-the-server]__4c0fb685._.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\[turbopack]_runtime.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\app\api\webhooks\clerk\route.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\server\require.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\server\load-components.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\build\utils.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\build\worker.js
+- D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\compiled\jest-worker\processChild.js
+    at Context.externalRequire [as x] (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\[turbopack]_runtime.js:514:15)
+    at module evaluation (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\[root-of-the-server]__4c0fb685._.js:1:10230)
+    at instantiateModule (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\[turbopack]_runtime.js:715:9)
+    at getOrInstantiateModuleFromParent (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\[turbopack]_runtime.js:738:12)
+    at Context.esmImport [as i] (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\[turbopack]_runtime.js:228:20)
+    at module evaluation (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\_f4e507bd._.js:8:48040)
+    at instantiateModule (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\[turbopack]_runtime.js:715:9)
+    at getOrInstantiateModuleFromParent (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\[turbopack]_runtime.js:738:12)
+    at Context.esmImport [as i] (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\[turbopack]_runtime.js:228:20)
+Error: Failed to collect configuration for /profile
+    at ignore-listed frames {
+  [cause]: Error: Failed to load external module mongoose: Error: Cannot find module 'sift'
+  Require stack:
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\lib\helpers\populate\assignVals.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\lib\model.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\lib\mongoose.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\lib\index.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\index.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[root-of-the-server]__9e698fcf._.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\app\_not-found\page.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\server\require.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\server\load-components.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\build\utils.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\build\worker.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\compiled\jest-worker\processChild.js
+      at Context.externalRequire [as x] (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js:514:15)
+      at module evaluation (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[root-of-the-server]__9e698fcf._.js:1:377)
+      at instantiateModule (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js:715:9)
+      at getOrInstantiateModuleFromParent (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js:738:12)
+      at Context.esmImport [as i] (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js:228:20)
+      at module evaluation (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[root-of-the-server]__9e698fcf._.js:1:453)
+      at instantiateModule (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js:715:9)
+      at getOrInstantiateModuleFromParent (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js:738:12)
+      at Context.esmImport [as i] (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js:228:20)
+      at module evaluation (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[root-of-the-server]__18baebf9._.js:1:5398)
+}
+Error: Failed to collect configuration for /outfit/[id]
+    at ignore-listed frames {
+  [cause]: Error: Failed to load external module mongoose: Error: Cannot find module 'sift'
+  Require stack:
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\lib\helpers\populate\assignVals.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\lib\model.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\lib\mongoose.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\lib\index.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\index.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[root-of-the-server]__24ee2bf5._.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\app\(auth)\sign-in\page.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\server\require.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\server\load-components.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\build\utils.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\build\worker.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\compiled\jest-worker\processChild.js
+      at Context.externalRequire [as x] (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js:514:15)
+      at module evaluation (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[root-of-the-server]__24ee2bf5._.js:1:377)
+      at instantiateModule (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js:715:9)
+      at getOrInstantiateModuleFromParent (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js:738:12)
+      at Context.esmImport [as i] (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js:228:20)
+      at module evaluation (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[root-of-the-server]__24ee2bf5._.js:1:453)
+      at instantiateModule (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js:715:9)
+      at getOrInstantiateModuleFromParent (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js:738:12)
+      at Context.esmImport [as i] (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js:228:20)
+      at module evaluation (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\frontend_cbc394b5._.js:11:85767)
+}
+Error: Failed to collect configuration for /share/[id]
+    at ignore-listed frames {
+  [cause]: Error: Failed to load external module mongoose: Error: Cannot find module 'sift'
+  Require stack:
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\lib\helpers\populate\assignVals.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\lib\model.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\lib\mongoose.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\lib\index.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\node_modules\mongoose\index.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[root-of-the-server]__7c3b7fee._.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\app\share\[id]\page.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\server\require.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\server\load-components.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\build\utils.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\build\worker.js
+  - D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\node_modules\next\dist\compiled\jest-worker\processChild.js
+      at Context.externalRequire [as x] (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js:514:15)
+      at module evaluation (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[root-of-the-server]__7c3b7fee._.js:1:45)
+      at instantiateModule (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js:715:9)
+      at getOrInstantiateModuleFromParent (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js:738:12)
+      at Context.esmImport [as i] (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js:228:20)
+      at module evaluation (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[root-of-the-server]__7c3b7fee._.js:1:121)
+      at instantiateModule (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js:715:9)
+      at getOrInstantiateModuleFromParent (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js:738:12)
+      at Context.esmImport [as i] (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[turbopack]_runtime.js:228:20)
+      at module evaluation (D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\.next\server\chunks\ssr\[root-of-the-server]__7c3b7fee._.js:1:1787)
+}
+
+> Build error occurred
+Error: Failed to collect page data for /api/outfit
+    at ignore-listed frames {
+  type: 'Error'
+}
+npm error Lifecycle script `build` failed with error:
+npm error code 1
+npm error path D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend
+npm error workspace fashfolio@0.1.0
+npm error location D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend
+npm error command failed
+npm error command C:\WINDOWS\system32\cmd.exe /d /s /c next build

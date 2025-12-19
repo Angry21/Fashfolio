@@ -1,0 +1,126 @@
+
+> fashfolio@0.1.0 build
+> next build
+
+ ΓÜá Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend\package-lock.json
+
+   Γû▓ Next.js 16.0.10 (Turbopack)
+   - Environments: .env.local
+
+ ΓÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+   Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 3 errors:
+./frontend/node_modules/cloudinary/lib/api_client/execute_request.js:5:11
+Module not found: Can't resolve 'q'
+  3 | const https = /^http:/.test(config().upload_prefix) ? require('http') : require('https');
+  4 | const querystring = require("querystring");
+> 5 | const Q = require('q');
+    |           ^^^^^^^^^^^^
+  6 | const url = require('url');
+  7 | const utils = require("../utils");
+  8 | const ensureOption = require('../utils/ensureOption').defaults(config());
+
+
+
+Import traces:
+  App Route:
+    ./frontend/node_modules/cloudinary/lib/api_client/execute_request.js
+    ./frontend/node_modules/cloudinary/lib/api_client/call_account_api.js
+    ./frontend/node_modules/cloudinary/lib/provisioning/account.js
+    ./frontend/node_modules/cloudinary/lib/cloudinary.js
+    ./frontend/node_modules/cloudinary/cloudinary.js
+    ./frontend/lib/actions/outfit.actions.ts
+    ./frontend/app/api/outfit/route.ts
+
+  Server Component:
+    ./frontend/node_modules/cloudinary/lib/api_client/execute_request.js
+    ./frontend/node_modules/cloudinary/lib/api_client/call_account_api.js
+    ./frontend/node_modules/cloudinary/lib/provisioning/account.js
+    ./frontend/node_modules/cloudinary/lib/cloudinary.js
+    ./frontend/node_modules/cloudinary/cloudinary.js
+    ./frontend/lib/actions/outfit.actions.ts
+    ./frontend/app/(dashboard)/dashboard/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./frontend/node_modules/cloudinary/lib/uploader.js:3:11
+Module not found: Can't resolve 'q'
+  1 | const fs = require('fs');
+  2 | const { extname, basename } = require('path');
+> 3 | const Q = require('q');
+    |           ^^^^^^^^^^^^
+  4 | const Writable = require("stream").Writable;
+  5 | const urlLib = require('url');
+  6 |
+
+
+
+Import traces:
+  App Route:
+    ./frontend/node_modules/cloudinary/lib/uploader.js
+    ./frontend/node_modules/cloudinary/lib/cloudinary.js
+    ./frontend/node_modules/cloudinary/cloudinary.js
+    ./frontend/lib/actions/outfit.actions.ts
+    ./frontend/app/api/outfit/route.ts
+
+  Server Component:
+    ./frontend/node_modules/cloudinary/lib/uploader.js
+    ./frontend/node_modules/cloudinary/lib/cloudinary.js
+    ./frontend/node_modules/cloudinary/cloudinary.js
+    ./frontend/lib/actions/outfit.actions.ts
+    ./frontend/app/(dashboard)/dashboard/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./frontend/node_modules/@radix-ui/react-dialog/dist/index.mjs:16:1
+Module not found: Can't resolve 'react-remove-scroll'
+  14 | import { Primitive } from "@radix-ui/react-primitive";
+  15 | import { useFocusGuards } from "@radix-ui/react-focus-guards";
+> 16 | import { RemoveScroll } from "react-remove-scroll";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  17 | import { hideOthers } from "aria-hidden";
+  18 | import { createSlot } from "@radix-ui/react-slot";
+  19 | import { Fragment, jsx, jsxs } from "react/jsx-runtime";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./frontend/node_modules/@radix-ui/react-dialog/dist/index.mjs [Client Component Browser]
+    ./frontend/components/ui/sheet.tsx [Client Component Browser]
+    ./frontend/components/shared/EditOutfitSheet.tsx [Client Component Browser]
+    ./frontend/components/shared/FeedCard.tsx [Client Component Browser]
+    ./frontend/components/shared/FeedCard.tsx [Server Component]
+    ./frontend/app/(dashboard)/dashboard/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./frontend/node_modules/@radix-ui/react-dialog/dist/index.mjs [Client Component SSR]
+    ./frontend/components/ui/sheet.tsx [Client Component SSR]
+    ./frontend/components/shared/EditOutfitSheet.tsx [Client Component SSR]
+    ./frontend/components/shared/FeedCard.tsx [Client Component SSR]
+    ./frontend/components/shared/FeedCard.tsx [Server Component]
+    ./frontend/app/(dashboard)/dashboard/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at ./frontend/node_modules/ (radix-ui/react-dialog/dist/index.mjs:16:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+npm error Lifecycle script `build` failed with error:
+npm error code 1
+npm error path D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend
+npm error workspace fashfolio@0.1.0
+npm error location D:\EXAMS\AGENTIC AI\MAJORS\fashfolio-app\frontend
+npm error command failed
+npm error command C:\WINDOWS\system32\cmd.exe /d /s /c next build
