@@ -1,20 +1,12 @@
-# backend/agents/vogue.py
-import google.generativeai as genai
-import os
+from utils_openrouter import query_openrouter
+
+# VOGUE Uses Llama 3.2 3B (Free, Fast, Reliable)
+MODEL = "meta-llama/llama-3.2-3b-instruct:free"
 
 def ask_vogue(context):
-    api_key = os.getenv("GEMINI_API_KEY")
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel('gemini-1.5-flash')
-    
     system_prompt = """
-    You are VOGUE, the Creative Director of FashFolio.
-    Your focus is PURE AESTHETICS. You do not care about price.
-    Analyze the input and provide:
-    1. A visual mood board description.
-    2. Key color palettes (Hex codes).
-    3. Trending fashion keywords for this season.
+    You are VOGUE, the Creative Director.
+    Focus: Aesthetics, Trends, Color Palettes.
+    Output: 3 bullet points on visual direction.
     """
-    
-    response = model.generate_content(f"{system_prompt}\n\nTask: {context}")
-    return response.text
+    return query_openrouter(MODEL, system_prompt, context)

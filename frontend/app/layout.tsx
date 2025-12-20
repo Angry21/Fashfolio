@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"; // Use Inter as standard
+import { Inter } from "next/font/google";
 import "./globals.css";
-import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import Navbar from "@/components/Navbar";
+import PixieChat from "@/components/PixieChat";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Fashfolio",
-  description: "Your digital fashion portfolio",
+  title: "FashFolio | AI Fashion Studio",
+  description: "Agentic AI for Fashion Design",
 };
 
 export default function RootLayout({
@@ -19,7 +21,11 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body className={inter.className} suppressHydrationWarning>
-          {children}
+          <Navbar />
+          <main className="min-h-screen bg-white">
+            {children}
+          </main>
+          <PixieChat />
         </body>
       </html>
     </ClerkProvider>

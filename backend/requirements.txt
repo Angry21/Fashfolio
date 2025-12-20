@@ -1,2 +1,5 @@
 google-generativeai
 python-dotenv
+Pillow
+requests
+openai>=1.0.0

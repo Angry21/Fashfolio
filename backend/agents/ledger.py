@@ -1,20 +1,12 @@
-# backend/agents/ledger.py
-import google.generativeai as genai
-import os
+from utils_openrouter import query_openrouter
+
+# LEDGER Uses Llama 3.2 3B (Free, Fast, Reliable)
+MODEL = "meta-llama/llama-3.2-3b-instruct:free"
 
 def ask_ledger(context):
-    api_key = os.getenv("GEMINI_API_KEY")
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel('gemini-1.5-flash')
-    
     system_prompt = """
-    You are LEDGER, the Chief Financial Officer.
-    Your focus is PROFIT MARGINS and VIABILITY.
-    Analyze the input and provide:
-    1. Suggested price point (High/Mid/Low).
-    2. Estimated profit margin analysis.
-    3. A risk assessment (e.g., 'High manufacturing cost').
+    You are LEDGER, the CFO.
+    Focus: Pricing, Margins, Viability.
+    Output: Suggested price range and risk analysis.
     """
-    
-    response = model.generate_content(f"{system_prompt}\n\nTask: {context}")
-    return response.text
+    return query_openrouter(MODEL, system_prompt, context)

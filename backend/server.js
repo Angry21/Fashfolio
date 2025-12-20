@@ -3,7 +3,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const { spawn } = require('child_process');
+const { OpenRouter } = require("@openrouter/sdk"); // Add OpenRouter SDK
 const Product = require('./models/Product');
+const path = require('path');
+
+// Helper to get the correct Python path
+// Helper to get the correct Python path
+const pythonCommand = process.env.PYTHON_COMMAND || 'python';
 
 const app = express();
 app.use(express.json());
@@ -29,65 +35,149 @@ app.get('/api/products', async (req, res) => {
 // 2. ADD Product
 app.post('/api/products', async (req, res) => {
     try {
-        const newProduct = new Product(req.body);
+        const { title, designer, price, category, image } = req.body;
+
+        // 1. Prepare Initial Data
+        let productData = {
+            title,
+            designer,
+            price,
+            category,
+            image,
+            aiTags: [],
+            visualScore: 0
+        };
+
+        // 2. Call PIXEL Agent if image exists
+        if (image) {
+            console.log("👁️ Pixel Agent is analyzing visual data...");
+
+            // Wrap Python call in a Promise
+            const pixelResult = await new Promise((resolve) => {
+                const pythonProcess = spawn(pythonCommand, ['./agents/pixel.py'], {
+                    env: { ...process.env, PYTHONPATH: './agents' }
+                });
+
+                let dataString = '';
+
+                // Handle input errors gracefully
+                pythonProcess.stdin.on('error', (err) => {
+                    console.error("Stdin Error:", err);
+                    resolve({});
+                });
+
+                pythonProcess.stdin.write(JSON.stringify({ imageUrl: image }));
+                pythonProcess.stdin.end();
+
+                pythonProcess.stdout.on('data', (data) => dataString += data.toString());
+
+                pythonProcess.on('close', (code) => {
+                    try {
+                        // Parse result (handle potential Python print warnings)
+                        const result = JSON.parse(dataString);
+                        resolve(result);
+                    } catch (e) {
+                        console.error("Pixel Parse Error. Raw output:", dataString);
+                        resolve({});
+                    }
+                });
+            });
+
+            // 3. Merge Pixel's Data
+            if (pixelResult.style_tags) {
+                console.log("✅ Pixel Analysis Complete:", pixelResult.style_tags);
+                productData.aiTags = pixelResult.style_tags;
+                productData.visualScore = pixelResult.visual_rating;
+                productData.dominantColor = pixelResult.color_hex;
+                productData.fabricType = pixelResult.fabric;
+            }
+        }
+
+        // 4. Save to DB
+        const newProduct = new Product(productData);
         await newProduct.save();
-        res.json(newProduct);
+
+        res.status(201).json(newProduct);
+
     } catch (err) {
+        console.error(err);
         res.status(500).json({ error: err.message });
     }
 });
 
-// 3. AI TREND ANALYSIS
+// 3. AI TREND ANALYSIS (OpenRouter Implementation)
 app.get('/api/analyze-trends', async (req, res) => {
     try {
+        console.log("Analyzing trends with OpenRouter...");
+
+        // Initialize OpenRouter
+        const openrouter = new OpenRouter({
+            apiKey: process.env.OPENROUTER_API_KEY,
+        });
+
         const products = await Product.find();
-        // Use 'python3' for Linux compatibility, falling back to 'python' if needed or configured via env
-        const pythonCommand = process.env.PYTHON_COMMAND || 'python';
-        const pythonProcess = spawn(pythonCommand, ['./ai_trend.py'], {
-            env: { ...process.env }
-        });
+        let updatedCount = 0;
 
-        let dataString = '';
-        let errorString = '';
+        for (const product of products) {
+            // Only analyze if missing data or low score (optimization)
+            if (!product.marketingBlurb || product.trendScore === 0 || !product.trendScore) {
 
-        pythonProcess.stdin.write(JSON.stringify(products));
-        pythonProcess.stdin.end();
+                const prompt = `
+                Analyze this fashion item:
+                Item: ${product.title}
+                Designer: ${product.designer}
+                Category: ${product.category}
+                Price: $${product.price}
 
-        pythonProcess.stdout.on('data', (data) => {
-            dataString += data.toString();
-        });
+                Task:
+                1. Give a 'trendScore' from 0 to 100 based on current fashion trends.
+                2. Write a short, catchy 1-sentence 'marketingBlurb' for social media.
+                
+                Return ONLY valid JSON like this: {"trendScore": 85, "marketingBlurb": "The must-have look for summer."}
+                `;
 
-        pythonProcess.stderr.on('data', (data) => {
-            errorString += data.toString();
-            // Log plain errors but don't crash response yet, wait for close
-            console.error("Python Error:", data.toString());
-        });
+                try {
+                    const completion = await openrouter.chat.send({
+                        model: "mistralai/devstral-2512:free",
+                        messages: [
+                            { role: "user", content: prompt }
+                        ]
+                    });
 
-        pythonProcess.on('close', async (code) => {
-            if (code !== 0) {
-                return res.status(500).json({ error: "AI Processing Failed", details: errorString });
-            }
-            try {
-                const results = JSON.parse(dataString);
+                    const responseContent = completion.choices[0]?.message?.content;
 
-                // SAVE TO DATABASE
-                for (const p of results) {
-                    if (p.marketingBlurb || p.trendScore > 0) {
-                        await Product.findByIdAndUpdate(p._id, {
-                            trendScore: p.trendScore,
-                            marketingBlurb: p.marketingBlurb
-                        });
+                    if (responseContent) {
+                        // Clean up markdown code blocks if present
+                        const jsonString = responseContent.replace(/```json/g, '').replace(/```/g, '').trim();
+                        try {
+                            const aiData = JSON.parse(jsonString);
+
+                            if (aiData.trendScore && aiData.marketingBlurb) {
+                                await Product.findByIdAndUpdate(product._id, {
+                                    trendScore: aiData.trendScore,
+                                    marketingBlurb: aiData.marketingBlurb
+                                });
+                                updatedCount++;
+                            }
+                        } catch (e) {
+                            console.error(`Failed to parse AI response for ${product.title}:`, e.message);
+                        }
                     }
+                } catch (apiError) {
+                    console.error(`OpenRouter API Error for ${product.title}:`, apiError.message);
+                    // Continue to next product even if one fails
                 }
-
-                // Return the freshly updated list from DB
-                const updatedProducts = await Product.find().sort({ createdAt: -1 });
-                res.json(updatedProducts);
-            } catch (e) {
-                res.status(500).json({ error: "AI Parsing Failed", details: e.message });
             }
-        });
+        }
+
+        console.log(`Updated ${updatedCount} products.`);
+
+        // Return updated list
+        const finalProducts = await Product.find().sort({ createdAt: -1 });
+        res.json(finalProducts);
+
     } catch (err) {
+        console.error("Global Trend Analysis Error:", err);
         res.status(500).json({ error: err.message });
     }
 });
@@ -96,8 +186,7 @@ app.get('/api/analyze-trends', async (req, res) => {
 app.post('/api/score-users', async (req, res) => {
     try {
         const users = req.body;
-        // Use 'python3' for Linux compatibility
-        const pythonCommand = process.env.PYTHON_COMMAND || 'python';
+        // Use consolidated pythonCommand
         const pythonProcess = spawn(pythonCommand, ['./ai_scoring.py']);
 
         let dataString = '';
@@ -134,17 +223,6 @@ app.post('/api/score-users', async (req, res) => {
 // 5. SEYNA AGENT COMMAND CENTER
 app.post('/api/seyna/command', async (req, res) => {
     const { goal } = req.body;
-    // NOTE: PYTHONPATH needs to include the current directory so Python finds the 'agents' package
-    // We use backend/agents/seyna.py assuming server.js is in backend/ and execution context implies finding it relative or absolute.
-    // Given server.js is in backend/, agents/seyna.py is correct relative path.
-    // PYTHONPATH needs to include backend/agents or just backend depending on imports.
-    // Since seyna.py imports from vogue, ledger etc which are in the same folder, and we run seyna.py,
-    // we should set PYTHONPATH to include the agents directory or run from within it.
-    // Simpler: Set PYTHONPATH to ./agents so seyna.py can find its siblings if they are imported as top-level modules.
-
-    // Attempting to run from current directory (backend), so './agents/seyna.py' is path.
-    // Env PYTHONPATH: './agents' allows imports like 'import vogue' inside seyna.py to work if seyna.py is scripts.
-    const pythonCommand = process.env.PYTHON_COMMAND || 'python';
 
     const pythonProcess = spawn(pythonCommand, ['./agents/seyna.py'], {
         env: { ...process.env, PYTHONPATH: './agents' }
@@ -176,6 +254,58 @@ app.post('/api/seyna/command', async (req, res) => {
             res.status(500).json({ error: "Seyna Parsing Failed", details: e.message, raw: dataString });
         }
     });
+});
+
+// 6. PIXIE AGENT CHAT (Context Aware)
+app.post('/api/agent/chat', async (req, res) => {
+    try {
+        // 1. Extract context (default to 'CREATIVE_MODE' if missing)
+        const { message, context = "CREATIVE_MODE" } = req.body;
+
+        // Fetch a small subset of products for context
+        const inventory = await Product.find().limit(10).select('title price category trendScore');
+
+        const inputPayload = {
+            query: message,
+            products: inventory,
+            context: context // 2. Pass context to Python
+        };
+
+        // Using ai_agent.py (Update this file next)
+        const pythonProcess = spawn(pythonCommand, ['./ai_agent.py'], {
+            env: { ...process.env }
+        });
+
+        let dataString = '';
+        let errorString = '';
+
+        pythonProcess.stdin.write(JSON.stringify(inputPayload));
+        pythonProcess.stdin.end();
+
+        pythonProcess.stdout.on('data', (data) => {
+            dataString += data.toString();
+        });
+
+        pythonProcess.stderr.on('data', (data) => {
+            errorString += data.toString();
+            console.error("Pixie Agent Error:", data.toString());
+        });
+
+        pythonProcess.on('close', (code) => {
+            if (code !== 0) {
+                return res.status(500).json({ error: "Agent Process Failed", details: errorString });
+            }
+            try {
+                const result = JSON.parse(dataString);
+                res.json(result);
+            } catch (e) {
+                res.status(500).json({ error: "Agent JSON Parse Error", details: e.message, raw: dataString });
+            }
+        });
+
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
 
 const PORT = process.env.PORT || 5000;

@@ -1,61 +1,48 @@
-# backend/agents/seyna.py
 import sys
 import json
-import os
-from dotenv import load_dotenv
-
-# Load environment variables for standalone execution
-load_dotenv()
-
+from utils_openrouter import query_openrouter
 from vogue import ask_vogue
 from ledger import ask_ledger
 from echo import ask_echo
 
-# Seyna is the only one who talks to the outside world (Node.js)
+# SEYNA: Uses Llama 3.2 3B (Free, Fast, Reliable)
+MODEL = "meta-llama/llama-3.2-3b-instruct:free"
+
 def main():
     try:
-        # 1. Read the Goal from the User
         input_data = sys.stdin.read()
         request = json.loads(input_data)
         goal = request.get('goal')
         
         report = {
-            "seyna_status": "Processing Goal: " + goal,
+            "seyna_status": "Orchestrating Agents via OpenRouter...",
             "team_reports": []
         }
 
-        # 2. Seyna Decides: "Everyone, get to work!" 
-        # (In a complex agent, she would choose WHO to call. For now, she calls the full board.)
+        # 1. Seyna Thinks (Plan)
+        system_prompt = "You are SEYNA, the AI Supervisor. Briefly acknowledge the goal and delegate."
+        seyna_output = query_openrouter(MODEL, system_prompt, goal)
+        report['team_reports'].append({"agent": "Seyna", "role": "Supervisor", "output": seyna_output})
         
-        # Call VOGUE
-        vogue_output = ask_vogue(goal)
+        # 2. Call Sub-Agents (Parallel Execution)
+        # In a real async app, these would run in parallel. Here we run sequential for simplicity.
+        
         report['team_reports'].append({
-            "agent": "Vogue",
-            "role": "Creative Director",
-            "output": vogue_output
+            "agent": "Vogue", "role": "Creative", "output": ask_vogue(goal)
+        })
+        
+        report['team_reports'].append({
+            "agent": "Ledger", "role": "Finance", "output": ask_ledger(goal)
         })
 
-        # Call LEDGER
-        ledger_output = ask_ledger(goal)
         report['team_reports'].append({
-            "agent": "Ledger",
-            "role": "CFO",
-            "output": ledger_output
+            "agent": "Echo", "role": "Marketing", "output": ask_echo(goal)
         })
 
-        # Call ECHO
-        echo_output = ask_echo(goal)
-        report['team_reports'].append({
-            "agent": "Echo",
-            "role": "Marketing Head",
-            "output": echo_output
-        })
-
-        # 3. Final Output
         print(json.dumps(report))
 
     except Exception as e:
-        print(json.dumps({"error": str(e)}), file=sys.stderr)
+        print(json.dumps({"error": str(e)}))
 
 if __name__ == "__main__":
     main()
